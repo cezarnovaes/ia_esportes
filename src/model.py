@@ -2,11 +2,39 @@ import tensorflow as tf
 
 from tensorflow.keras import datasets, layers, models
 import matplotlib.pyplot as plt
-from kaggle.api.kaggle_api_extended import KaggleApi
 
-# Inicialize a API
-api = KaggleApi()
-api.authenticate()
+(train_images, train_labels), (test_images, test_labels) =  
 
-# Baixe o dataset
-api.dataset_download_files('gpiosenka/100-sports-image-classification', path='./', unzip=True)
+# Normalize pixel values to be between 0 and 1
+train_images, test_images = train_images / 255.0, test_images / 255.0
+
+class_names = ['aviao', 'automobile', 'bird', 'cat', 'deer',
+               'dog', 'frog', 'horse', 'ship', 'truck']
+
+plt.figure(figsize=(10,10))
+for i in range(1000,1025):
+    plt.subplot(5,5,i-1000+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(train_images[i])
+    # The CIFAR labels happen to be arrays,
+    # which is why you need the extra index
+    plt.xlabel(class_names[train_labels[i][0]])
+plt.show()
+
+
+model = models.Sequential()
+model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+model.add(layers.MaxPooling2D((2, 2)))
+model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+
+
+model.summary()
+
+
+model.add(layers.Flatten())
+model.add(layers.Dense(64, activation='relu'))
+model.add(layers.Dense(10))
