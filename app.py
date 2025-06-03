@@ -7,11 +7,18 @@ from tensorflow.keras.applications.imagenet_utils import preprocess_input
 import os
 from PIL import Image
 import io
+from flask_cors import CORS
+import pandas as pd  # Adicionado para ler o CSV
 
 app = Flask(__name__)
+CORS(app)
 
-# Carrega o modelo uma vez quando a API inicia
-modelo = load_model('models/modelo.h5')
+# Carrega o modelo e os labelsweb
+modelo = load_model('models/modelo_2.h5')
+
+# Carrega o mapeamento de classes
+df_classes = pd.read_csv('./data/sports.csv')
+class_mapping = dict(zip(df_classes['class id'], df_classes['labels']))
 
 # Configurações
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -19,63 +26,61 @@ UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def prepare_image(img, target_size=(224, 224)):
-    # Redimensiona a imagem para o tamanho alvo
     if img.mode != "RGB":
         img = img.convert("RGB")
     img = img.resize(target_size)
-    
-    # Converte para array numpy e pré-processa
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     img_array = preprocess_input(img_array)
-    
     return img_array
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Verifica se a requisição tem a parte do arquivo
     if 'file' not in request.files:
         return jsonify({'error': 'Nenhuma imagem enviada'}), 400
     
     file = request.files['file']
     
-    # Verifica se o arquivo tem um nome e extensão permitida
     if file.filename == '':
         return jsonify({'error': 'Nenhuma imagem selecionada'}), 400
     
     if file and allowed_file(file.filename):
         try:
-            # Lê a imagem diretamente para memória
             img = Image.open(io.BytesIO(file.read()))
-            
-            # Prepara a imagem para classificação
             processed_image = prepare_image(img)
+            predictions = modelo.predict(processed_image)[0]
             
-            # Faz a predição
-            predictions = modelo.predict(processed_image)
-            predictions = predictions[0]  # Pega o primeiro batch
-            
-            # Ordena as predições e pega os índices
+            # Obtém os índices ordenados por probabilidade (do maior para menor)
             sorted_indices = np.argsort(predictions)[::-1]
             
-            # Pega a classe com maior probabilidade
+            # Mapeia os índices para nomes de classes
             top_class = int(sorted_indices[0])
+            top_class_name = class_mapping.get(top_class, "Classe desconhecida")
             top_prob = float(predictions[top_class])
             
-            # Pega as 3 classes com maior probabilidade
-            top3_classes = [int(i) for i in sorted_indices[:3]]
-            top3_probs = [float(predictions[i]) for i in sorted_indices[:3]]
+            # Prepara as top 3 classes
+            top3_classes = []
+            top3_probs = []
+            for i in sorted_indices[:3]:
+                class_id = int(i)
+                top3_classes.append({
+                    'class_id': class_id,
+                    'class_name': class_mapping.get(class_id, "Classe desconhecida"),
+                })
+                top3_probs.append(float(predictions[i]))
             
             # Formata a resposta
             response = {
-                'top_class': top_class,
-                'top_prob': top_prob,
+                'top_class': {
+                    'class_id': top_class,
+                    'class_name': top_class_name,
+                    'probability': top_prob
+                },
                 'top3_classes': top3_classes,
-                'top3_probs': top3_probs
+                'top3_probabilities': top3_probs
             }
             
             return jsonify(response)

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de Esportes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="icon-wrapper">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h1 class="title">Classificador de Esportes</h1>
+            </div>
+            <p class="subtitle">
+                Faça upload de uma imagem esportiva e descubra qual esporte está sendo praticado com inteligência artificial
+            </p>
+        </header>
+
+        <!-- Upload Area -->
+        <div class="upload-card">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-content" id="uploadContent">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="upload-text">
+                        <p class="upload-title">Arraste uma imagem esportiva aqui ou clique para selecionar</p>
+                        <p class="upload-subtitle">Suporta JPG, PNG, WebP até 10MB</p>
+                    </div>
+                    <button class="upload-button" id="selectButton">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        Selecionar Imagem
+                    </button>
+                </div>
+
+                <div class="preview-content hidden" id="previewContent">
+                    <div class="image-preview">
+                        <img id="previewImage" alt="Preview" />
+                        <div class="image-badge">
+                            <i class="fas fa-image"></i>
+                            Imagem carregada
+                        </div>
+                    </div>
+                    <div class="preview-info">
+                        <p class="file-name" id="fileName"></p>
+                        <button class="change-button" id="changeButton">Trocar imagem</button>
+                    </div>
+                </div>
+            </div>
+            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+        </div>
+
+        <!-- Classify Button -->
+        <div class="classify-section hidden" id="classifySection">
+            <button class="classify-button" id="classifyButton">
+                <i class="fas fa-bolt"></i>
+                <span id="buttonText">Classificar Imagem</span>
+            </button>
+        </div>
+
+        <!-- Error Alert -->
+        <div class="alert alert-error hidden" id="errorAlert">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="errorMessage"></span>
+        </div>
+
+        <!-- Results -->
+        <div class="results-section hidden" id="resultsSection">
+            <!-- Top Result -->
+            <div class="result-card primary-result">
+                <div class="card-header">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Classificação Principal</h3>
+                </div>
+                <div class="card-content">
+                    <div class="result-info">
+                        <div class="result-details">
+                            <p class="class-name" id="topClass">Classe 0</p>
+                            <p class="confidence" id="topConfidence">Confiança: 0%</p>
+                        </div>
+                        <div class="probability-display">
+                            <div class="probability-value" id="topProbability">0%</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="topProgress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Results -->
+            <div class="result-card">
+                <div class="card-header">
+                    <i class="fas fa-target"></i>
+                    <h3>Outras Possibilidades</h3>
+                </div>
+                <div class="card-content">
+                    <div class="other-results" id="otherResults">
+                        <!-- Results will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalClasses">0</div>
+                    <div class="stat-label">Classes Detectadas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="maxConfidence">0%</div>
+                    <div class="stat-label">Confiança Máxima</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="mainClass">0</div>
+                    <div class="stat-label">Classe Principal</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

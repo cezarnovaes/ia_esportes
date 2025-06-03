@@ -17,14 +17,8 @@ from sklearn.metrics import classification_report
 DATA_DIR = './data'
 BATCH_SIZE = 32
 IMG_SIZE = (224, 224)
-EPOCHS = 25
+EPOCHS = 10
 INIT_LR = 1e-4
-
-# Verificação da estrutura de dados
-print("Verificando estrutura de diretórios...")
-for split in ['train', 'valid', 'test']:
-    path = os.path.join(DATA_DIR, split)
-    print(f"{split}: {len(os.listdir(path))} classes encontradas")
 
 # Augmentação mais conservadora
 train_datagen = ImageDataGenerator(
@@ -136,7 +130,7 @@ history = model.fit(
     verbose=1
 )
 
-model.save('models/modelo.h5')
+model.save('models/modelo_2.h5')
 
 # Avaliação
 print("\nAvaliando modelo...")
