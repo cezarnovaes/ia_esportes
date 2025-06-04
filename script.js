@@ -4,6 +4,7 @@ class SportsClassifier {
     this.isClassifying = false
     this.initializeElements()
     this.bindEvents()
+    this.initializeNavigation()
   }
 
   initializeElements() {
@@ -59,6 +60,43 @@ class SportsClassifier {
     this.classifyButton.addEventListener("click", () => this.classifyImage())
   }
 
+  initializeNavigation() {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add active class to navigation links on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const sections = document.querySelectorAll('section[id]');
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  }
+
   handleFileSelect(event) {
     const files = event.target.files
     if (files && files.length > 0) {
@@ -87,15 +125,24 @@ class SportsClassifier {
   }
 
   processFile(file) {
-    if (file && file.type.startsWith("image/")) {
-      this.selectedImage = file
-      this.hideError()
-      this.hideResults()
-      this.showImagePreview(file)
-      this.showClassifyButton()
-    } else {
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
       this.showError("Por favor, selecione um arquivo de imagem válido.")
+      return
     }
+
+    // Validate file size (10MB limit)
+    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+    if (file.size > maxSize) {
+      this.showError("O arquivo é muito grande. Por favor, selecione uma imagem menor que 10MB.")
+      return
+    }
+
+    this.selectedImage = file
+    this.hideError()
+    this.hideResults()
+    this.showImagePreview(file)
+    this.showClassifyButton()
   }
 
   showImagePreview(file) {
@@ -121,6 +168,11 @@ class SportsClassifier {
   showError(message) {
     this.errorMessage.textContent = message
     this.errorAlert.classList.remove("hidden")
+    
+    // Auto-hide error after 5 seconds
+    setTimeout(() => {
+      this.hideError()
+    }, 5000)
   }
 
   hideError() {
@@ -166,6 +218,36 @@ class SportsClassifier {
     }
   }
 
+  async simulateClassification() {
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    // Generate mock results
+    const sports = [
+      "Futebol", "Basquete", "Tênis", "Vôlei", "Natação", 
+      "Atletismo", "Ciclismo", "Boxe", "Judô", "Ginástica"
+    ]
+    
+    const shuffled = [...sports].sort(() => 0.5 - Math.random())
+    const topSport = shuffled[0]
+    const topProbability = 0.7 + Math.random() * 0.25 // 70-95%
+    
+    const mockData = {
+      top_class: {
+        class_name: topSport,
+        probability: topProbability
+      },
+      top3_classes: shuffled.slice(0, 3).map(sport => ({ class_name: sport })),
+      top3_probabilities: [
+        topProbability,
+        Math.random() * (1 - topProbability) * 0.8,
+        Math.random() * (1 - topProbability) * 0.4
+      ]
+    }
+
+    this.displayResults(mockData)
+  }
+
   updateClassifyButton(isLoading) {
     if (isLoading) {
       this.classifyButton.disabled = true
@@ -177,57 +259,63 @@ class SportsClassifier {
   }
 
   displayResults(data) {
-      // Update top result
-      this.topClass.textContent = `${data.top_class.class_name}`;
-      this.topConfidence.textContent = `Confiança: ${this.formatProbability(data.top_class.probability)}`;
-      this.topProbability.textContent = this.formatProbability(data.top_class.probability);
+    // Update top result
+    this.topClass.textContent = data.top_class.class_name;
+    this.topConfidence.textContent = `Confiança: ${this.formatProbability(data.top_class.probability)}`;
+    this.topProbability.textContent = this.formatProbability(data.top_class.probability);
 
-      // Animate progress bar
-      setTimeout(() => {
-          this.topProgress.style.width = `${data.top_class.probability * 100}%`;
-      }, 100);
+    // Animate progress bar
+    setTimeout(() => {
+      this.topProgress.style.width = `${data.top_class.probability * 100}%`;
+    }, 100);
 
-      // Update other results
-      this.otherResults.innerHTML = "";
-      data.top3_classes.forEach((classInfo, index) => {
-          const probability = data.top3_probabilities[index];
-          const resultElement = this.createOtherResult(classInfo.class_name, probability);
-          this.otherResults.appendChild(resultElement);
-      });
+    // Update other results
+    this.otherResults.innerHTML = "";
+    data.top3_classes.forEach((classInfo, index) => {
+      if (index > 0) { // Skip the first one as it's already shown as top result
+        const probability = data.top3_probabilities[index];
+        const resultElement = this.createOtherResult(classInfo.class_name, probability);
+        this.otherResults.appendChild(resultElement);
+      }
+    });
 
-      // Update stats
-      this.totalClasses.textContent = data.top3_classes.length;
-      this.maxConfidence.textContent = this.formatProbability(data.top_class.probability);
-      this.mainClass.textContent = data.top_class.class_name;
+    // Update stats
+    this.totalClasses.textContent = data.top3_classes.length;
+    this.maxConfidence.textContent = this.formatProbability(data.top_class.probability);
+    this.mainClass.textContent = data.top_class.class_name;
 
-      this.showResults();
+    this.showResults();
   }
 
   createOtherResult(className, probability) {
-      const resultDiv = document.createElement('div');
-      resultDiv.className = 'result-item';
-      
-      const classSpan = document.createElement('span');
-      classSpan.className = 'class-name';
-      classSpan.textContent = className;
-      
-      const probSpan = document.createElement('span');
-      probSpan.className = 'probability';
-      probSpan.textContent = this.formatProbability(probability);
-      
-      const progressDiv = document.createElement('div');
-      progressDiv.className = 'progress-bar';
-      
-      const progressInner = document.createElement('div');
-      progressInner.className = 'progress';
+    const resultDiv = document.createElement('div');
+    resultDiv.className = 'result-item';
+    
+    const classSpan = document.createElement('span');
+    classSpan.className = 'class-name';
+    classSpan.textContent = className;
+    
+    const probSpan = document.createElement('span');
+    probSpan.className = 'probability';
+    probSpan.textContent = this.formatProbability(probability);
+    
+    const progressDiv = document.createElement('div');
+    progressDiv.className = 'progress-bar';
+    
+    const progressInner = document.createElement('div');
+    progressInner.className = 'progress';
+    
+    // Animate progress bar
+    setTimeout(() => {
       progressInner.style.width = `${probability * 100}%`;
-      
-      progressDiv.appendChild(progressInner);
-      resultDiv.appendChild(classSpan);
-      resultDiv.appendChild(probSpan);
-      resultDiv.appendChild(progressDiv);
-      
-      return resultDiv;
+    }, 200);
+    
+    progressDiv.appendChild(progressInner);
+    resultDiv.appendChild(classSpan);
+    resultDiv.appendChild(probSpan);
+    resultDiv.appendChild(progressDiv);
+    
+    return resultDiv;
   }
 
   formatProbability(probability) {

@@ -17,7 +17,7 @@ from sklearn.metrics import classification_report
 DATA_DIR = './data'
 BATCH_SIZE = 32
 IMG_SIZE = (224, 224)
-EPOCHS = 10
+EPOCHS = 50
 INIT_LR = 1e-4
 
 # Augmentação mais conservadora
