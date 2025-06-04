@@ -5,8 +5,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.imagenet_utils import preprocess_input
 import os
-from PIL import Image
-import io
+from io import BytesIO
 from flask_cors import CORS
 import pandas as pd  # Adicionado para ler o CSV
 
@@ -14,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Carrega o modelo e os labelsweb
-modelo = load_model('models/modelo_2.h5')
+modelo = load_model('models/modelo.h5')
 
 # Carrega o mapeamento de classes
 df_classes = pd.read_csv('./data/sports.csv')
@@ -28,13 +27,11 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def prepare_image(img, target_size=(224, 224)):
-    if img.mode != "RGB":
-        img = img.convert("RGB")
-    img = img.resize(target_size)
+def prepare_image(file_storage, target_size=(224, 224)):
+    img = image.load_img(BytesIO(file_storage.read()), target_size=target_size)
     img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)
-    img_array = preprocess_input(img_array)
+    img_array = np.expand_dims(img_array, axis=0) / 255.0 
+    file_storage.seek(0)
     return img_array
 
 @app.route('/predict', methods=['POST'])
@@ -49,8 +46,7 @@ def predict():
     
     if file and allowed_file(file.filename):
         try:
-            img = Image.open(io.BytesIO(file.read()))
-            processed_image = prepare_image(img)
+            processed_image = prepare_image(file)
             predictions = modelo.predict(processed_image)[0]
             
             # Obtém os índices ordenados por probabilidade (do maior para menor)
