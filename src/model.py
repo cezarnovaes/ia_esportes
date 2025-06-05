@@ -92,7 +92,7 @@ def build_model(num_classes):
 
     # Otimizador com weight decay para regularização
     optimizer = Adam(
-        learning_rate=lr_schedule,
+        learning_rate=INIT_LR,
         beta_1=0.9,
         beta_2=0.999,
         epsilon=1e-07,
