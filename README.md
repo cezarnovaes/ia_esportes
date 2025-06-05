@@ -4,6 +4,22 @@ Este projeto implementa um sistema completo de classificação de imagens usando
 
 ## Visão Geral do Projeto
 
+ia_esportes/
+├── data/
+│   ├── train/       # Dados de treino
+│   ├── valid/       # Dados de validação
+│   └── test/        # Dados de teste
+├── models/          # Modelos treinados
+├── src/
+│   ├── img/         # Imagens da página
+│   ├── web/         # Código da página web
+│   ├── model.p      # Construção do modelo
+│   ├── train.py     # Script de treinamento
+│   ├── predict.py   # Script de predição
+│   ├── api.py       # Código da api
+├── requirements.txt # Dependências
+└── README.md        # Este arquivo
+
 O sistema consiste em três componentes principais do modelo, dois componentes da parte web e a api:
 1. `model.py` - Construção do modelo e preparação dos dados
 2. `train.py` - Script de treinamento e avaliação

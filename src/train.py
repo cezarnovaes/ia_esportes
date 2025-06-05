@@ -76,7 +76,7 @@ print(f"F1-Score (weighted): {f1:.2%}")
 print("\nRelatório de Classificação Completo:")
 print(classification_report(y_true, y_pred, target_names=list(test_generator.class_indices.keys())))
 
-# 3. ROC-AUC (para modelos multiclasse)
+# 3. ROC-AUC
 try:
     roc_auc = roc_auc_score(y_true, y_pred_probs, multi_class='ovr')
     print(f"ROC-AUC Score (One-vs-Rest): {roc_auc:.2%}")
