@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de Esportes com IA | Deep Learning</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="/src/img/brain.png" type="image/png" sizes="48x48">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div>
+                    <h1>Classificador de Esportes</h1>
+                    <p>Sistema de Inteligência Artificial para classificação automática de imagens esportivas usando Deep Learning e Transfer Learning</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#overview" class="nav-link">Visão Geral</a>
+                <a href="#architecture" class="nav-link">Arquitetura</a>
+                <a href="#methodology" class="nav-link">Metodologia</a>
+                <a href="#results" class="nav-link">Resultados</a>
+                <a href="#demo" class="nav-link">Teste a IA</a>
+                <a href="#implementation" class="nav-link">Implementação</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Overview Section -->
+        <section id="overview" class="section">
+            <h2 class="section-title">Visão Geral do Projeto</h2>
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-target"></i> Objetivo</h3>
+                    <p>Desenvolver um sistema de classificação de imagens esportivas utilizando técnicas avançadas de Deep Learning, especificamente Transfer Learning com MobileNetV2, para identificar automaticamente diferentes modalidades esportivas em fotografias.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-cogs"></i> Tecnologias Utilizadas</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> TensorFlow & Keras</li>
+                        <li><i class="fas fa-check"></i> MobileNetV2 (Transfer Learning)</li>
+                        <li><i class="fas fa-check"></i> Data Augmentation</li>
+                        <li><i class="fas fa-check"></i> Fine-tuning</li>
+                        <li><i class="fas fa-check"></i> Callbacks Avançados</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Section -->
+        <section id="architecture" class="section">
+            <h2 class="section-title">Arquitetura do Modelo</h2>
+            <div class="card">
+                <div class="architecture">
+                    <h3>Fluxo de Processamento</h3>
+                    <div class="arch-flow">
+                        <div class="arch-step">
+                            <i class="fas fa-image"></i>
+                            <div>Imagem de Entrada</div>
+                            <small>224x224x3</small>
+                        </div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="arch-step">
+                            <i class="fas fa-layer-group"></i>
+                            <div>MobileNetV2</div>
+                            <small>Base Pré-treinada</small>
+                        </div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="arch-step">
+                            <i class="fas fa-compress-arrows-alt"></i>
+                            <div>Global Average Pooling</div>
+                            <small>Redução Dimensional</small>
+                        </div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="arch-step">
+                            <i class="fas fa-random"></i>
+                            <div>Dropout + BatchNorm</div>
+                            <small>Regularização</small>
+                        </div>
+                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="arch-step">
+                            <i class="fas fa-sitemap"></i>
+                            <div>Dense Layer</div>
+                            <small>Classificação Final</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="card">
+                    <h3><i class="fas fa-mobile-alt"></i> MobileNetV2</h3>
+                    <p>Arquitetura eficiente otimizada para dispositivos móveis, utilizando depthwise separable convolutions para reduzir parâmetros mantendo alta performance.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-recycle"></i> Transfer Learning</h3>
+                    <p>Aproveitamento de conhecimento pré-treinado no ImageNet, congelando camadas iniciais e fine-tuning das últimas 20 camadas para adaptação ao domínio esportivo.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-shield-alt"></i> Regularização</h3>
+                    <p>Implementação de Dropout (0.2), BatchNormalization e Weight Decay para prevenir overfitting e melhorar generalização.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology Section -->
+        <section id="methodology" class="section">
+            <h2 class="section-title">Metodologia de Desenvolvimento</h2>
+            
+            <div class="card">
+                <h3><i class="fas fa-database"></i> Preparação dos Dados</h3>
+                <div class="code-block">
+<span class="comment"># Configuração de Data Augmentation</span>
+train_datagen = ImageDataGenerator(
+    rescale=<span class="string">1./255</span>,
+    rotation_range=<span class="string">15</span>,
+    width_shift_range=<span class="string">0.15</span>,
+    height_shift_range=<span class="string">0.15</span>,
+    shear_range=<span class="string">0.15</span>,
+    zoom_range=<span class="string">0.15</span>,
+    horizontal_flip=<span class="keyword">True</span>,
+    brightness_range=[<span class="string">0.9</span>, <span class="string">1.1</span>]
+)
+                </div>
+                <p>Aplicação de técnicas de augmentação conservadoras para aumentar a diversidade dos dados de treino sem comprometer a qualidade das imagens.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-brain"></i> Fine-tuning Strategy</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Congelamento das primeiras camadas</li>
+                        <li><i class="fas fa-check"></i> Treinamento das últimas 20 camadas</li>
+                        <li><i class="fas fa-check"></i> Learning rate baixo (1e-4)</li>
+                        <li><i class="fas fa-check"></i> Otimizador Adam com weight decay</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> Callbacks Inteligentes</h3>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> EarlyStopping (patience=10)</li>
+                        <li><i class="fas fa-check"></i> ReduceLROnPlateau (factor=0.5)</li>
+                        <li><i class="fas fa-check"></i> Restore best weights</li>
+                        <li><i class="fas fa-check"></i> Monitoramento de val_loss</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="section">
+            <h2 class="section-title">Resultados e Performance</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">50</div>
+                    <div class="stat-label">Épocas Máximas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">224x224</div>
+                    <div class="stat-label">Resolução de Entrada</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">32</div>
+                    <div class="stat-label">Batch Size</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">1e-4</div>
+                    <div class="stat-label">Learning Rate Inicial</div>
+                </div>
+            </div>
+
+            <div class="image-gallery">
+                <div class="image-card">
+                    <img src="confusion_matrix.png" alt="Matriz de Confusão">
+                    <div class="image-card-content">
+                        <h4><i class="fas fa-table"></i> Matriz de Confusão</h4>
+                        <p>Visualização detalhada da performance do modelo por classe, mostrando verdadeiros positivos, falsos positivos e a distribuição de erros entre as diferentes modalidades esportivas.</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="training_history.png" alt="Histórico de Treinamento">
+                    <div class="image-card-content">
+                        <h4><i class="fas fa-chart-line"></i> Histórico de Treinamento</h4>
+                        <p>Evolução da acurácia e loss durante o treinamento, demonstrando a convergência do modelo e a eficácia das técnicas de regularização aplicadas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-clipboard-list"></i> Métricas de Avaliação</h3>
+                <p>O modelo foi avaliado utilizando múltiplas métricas para garantir uma análise completa da performance:</p>
+                <div class="code-block">
+<span class="comment"># Avaliação detalhada do modelo</span>
+test_loss, test_acc = model.evaluate(test_generator)
+y_pred = np.argmax(model.predict(test_generator), axis=<span class="string">1</span>)
+
+<span class="comment"># Relatório de classificação completo</span>
+<span class="keyword">print</span>(classification_report(
+    test_generator.classes, 
+    y_pred, 
+    target_names=list(train_generator.class_indices.keys())
+))
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Section -->
+        <section id="demo" class="section">
+            <h2 class="section-title">Teste a Inteligência Artificial</h2>
+            <div class="demo-intro">
+                <div class="card">
+                    <h3><i class="fas fa-play-circle"></i> Experimente o Modelo</h3>
+                    <p>Faça upload de uma imagem esportiva e veja o modelo em ação! O sistema irá analisar a imagem e identificar qual esporte está sendo praticado, mostrando a confiança da predição.</p>
+                </div>
+            </div>
+
+            <div class="demo-container">
+                <!-- Upload Area -->
+                <div class="upload-card">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content" id="uploadContent">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="upload-text">
+                                <p class="upload-title">Arraste uma imagem esportiva aqui ou clique para selecionar</p>
+                                <p class="upload-subtitle">Suporta JPG, PNG, WebP até 10MB</p>
+                            </div>
+                            <button class="upload-button" id="selectButton">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                Selecionar Imagem
+                            </button>
+                        </div>
+
+                        <div class="preview-content hidden" id="previewContent">
+                            <div class="image-preview">
+                                <img id="previewImage" alt="Preview" />
+                                <div class="image-badge">
+                                    <i class="fas fa-image"></i>
+                                    Imagem carregada
+                                </div>
+                            </div>
+                            <div class="preview-info">
+                                <p class="file-name" id="fileName"></p>
+                                <button class="change-button" id="changeButton">Trocar imagem</button>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+
+                <!-- Classify Button -->
+                <div class="classify-section hidden" id="classifySection">
+                    <button class="classify-button" id="classifyButton">
+                        <i class="fas fa-bolt"></i>
+                        <span id="buttonText">Classificar Imagem</span>
+                    </button>
+                </div>
+
+                <!-- Error Alert -->
+                <div class="alert alert-error hidden" id="errorAlert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="errorMessage"></span>
+                </div>
+
+                <!-- Results -->
+                <div class="results-section hidden" id="resultsSection">
+                    <!-- Top Result -->
+                    <div class="result-card primary-result">
+                        <div class="card-header">
+                            <i class="fas fa-trophy"></i>
+                            <h3>Classificação Principal</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="result-info">
+                                <div class="result-details">
+                                    <p class="class-name" id="topClass">Classe 0</p>
+                                    <p class="confidence" id="topConfidence">Confiança: 0%</p>
+                                </div>
+                                <div class="probability-display">
+                                    <div class="probability-value" id="topProbability">0%</div>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="topProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other Results -->
+                    <div class="result-card">
+                        <div class="card-header">
+                            <i class="fas fa-target"></i>
+                            <h3>Outras Possibilidades</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="other-results" id="otherResults">
+                                <!-- Results will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Stats -->
+                    <div class="demo-stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalClasses">0</div>
+                            <div class="stat-label">Classes Detectadas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="maxConfidence">0%</div>
+                            <div class="stat-label">Confiança Máxima</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="mainClass">0</div>
+                            <div class="stat-label">Classe Principal</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Section -->
+        <section id="implementation" class="section">
+            <h2 class="section-title">Detalhes de Implementação</h2>
+            
+            <div class="grid grid-2">
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Configurações Técnicas</h3>
+                    <div class="code-block">
+<span class="comment"># Configurações principais</span>
+BATCH_SIZE = <span class="string">32</span>
+IMG_SIZE = (<span class="string">224</span>, <span class="string">224</span>)
+EPOCHS = <span class="string">50</span>
+INIT_LR = <span class="string">1e-4</span>
+
+<span class="comment"># Otimizador com weight decay</span>
+optimizer = Adam(
+    learning_rate=INIT_LR,
+    weight_decay=<span class="string">1e-4</span>
+)
+                    </div>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-save"></i> Salvamento e Deployment</h3>
+                    <p>O modelo treinado é salvo em formato H5 para facilitar o deployment e reutilização. A arquitetura permite fácil integração em aplicações web e mobile.</p>
+                    <div class="code-block">
+<span class="comment"># Salvamento do modelo</span>
+model.save(<span class="string">'models/modelo_2.h5'</span>)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-lightbulb"></i> Inovações e Otimizações</h3>
+                <div class="grid grid-3">
+                    <div>
+                        <h4>Data Augmentation Inteligente</h4>
+                        <p>Aplicação de transformações conservadoras que preservam as características essenciais dos esportes.</p>
+                    </div>
+                    <div>
+                        <h4>Fine-tuning Seletivo</h4>
+                        <p>Estratégia de descongelamento gradual das últimas camadas para adaptação específica ao domínio.</p>
+                    </div>
+                    <div>
+                        <h4>Callbacks Adaptativos</h4>
+                        <p>Sistema inteligente de parada antecipada e redução de learning rate baseado na performance de validação.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 2rem 0; color: var(--text-secondary); border-top: 1px solid #e2e8f0; margin-top: 4rem;">
+            <p>Desenvolvido usando TensorFlow e Transfer Learning</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
