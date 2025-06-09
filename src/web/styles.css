@@ -757,3 +757,205 @@ body {
     margin-left: 0;
   }
 }
+
+/* Ajustes gerais para mobile */
+@media (max-width: 768px) {
+  /* Ajuste no container para evitar margens muito pequenas */
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Hero section mais compacta */
+  .hero {
+    padding: 2rem 0;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+
+  /* Navegação em coluna quando espaço é limitado */
+  .nav-content {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .nav-link {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Seções com menos margem */
+  .section {
+    margin-bottom: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Cards com menos padding */
+  .card {
+    padding: 1.5rem;
+  }
+
+  /* Arquitetura em coluna */
+  .arch-flow {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .arrow {
+    transform: rotate(90deg);
+    margin: 0.5rem 0;
+  }
+
+  /* Galeria em coluna única */
+  .image-gallery {
+    grid-template-columns: 1fr;
+  }
+  
+  .image-card img {
+    height: auto;
+    max-height: 250px;
+  }
+
+  @media (max-width: 480px) {
+  .upload-area {
+    padding: 1rem 0.5rem;
+  }
+  
+  .upload-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Área de upload mais compacta */
+  .upload-area {
+    padding: 1.5rem;
+  }
+  
+  .upload-title {
+    font-size: 1rem;
+  }
+  
+  .upload-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .upload-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* Resultados em coluna */
+  .result-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .probability-display {
+    text-align: left;
+    width: 100%;
+  }
+  
+  .other-results .result-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .other-results .progress-bar {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+
+/* Ajustes para telas muito pequenas (menos de 480px) */
+@media (max-width: 480px) {
+  /* Textos menores */
+  body {
+    font-size: 14px;
+  }
+  
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  /* Grids em coluna única */
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Cards mais compactos */
+  .card {
+    padding: 1rem;
+  }
+  
+  /* Área de upload minimalista */
+  .upload-area {
+    padding: 1rem;
+  }
+  
+  .upload-content {
+    gap: 0.5rem;
+  }
+  
+  .upload-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .upload-icon i {
+    font-size: 1.5rem;
+  }
+  
+  /* Botão de classificar menor */
+  .classify-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  /* Estatísticas em coluna */
+  .stats-grid, .demo-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Melhorias para tablets (768px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Ajuste no grid para 2 colunas */
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Hero section ajustada */
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+  
+  /* Navegação com gap menor */
+  .nav-content {
+    gap: 1rem;
+  }
+}
