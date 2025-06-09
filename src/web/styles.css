@@ -256,13 +256,24 @@ body {
 }
 
 .image-card img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
+  width: 100%; 
+  max-height: auto; 
+  object-fit: contain; 
+  display: block;
+  margin: 0 auto; 
+  border-bottom: 1px solid #eee;
 }
 
+/* Estilo do conteúdo abaixo da imagem */
 .image-card-content {
-  padding: 1.5rem;
+    padding: 1.5rem;
+    text-align: center; /* Ou left, conforme seu layout */
+}
+
+/* Efeito hover (opcional) */
+.image-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
 }
 
 .image-card h4 {
@@ -703,6 +714,11 @@ body {
     padding: 0.5rem;
   }
 
+  .image-card img {
+    width: 100%; /* Ocupa toda a largura em mobile */
+    max-height: 300px; /* Altura menor */
+  }
+
   .hero h1 {
     font-size: 2.5rem;
   }
@@ -821,22 +837,18 @@ body {
   .image-gallery {
     grid-template-columns: 1fr;
   }
-  
-  .image-card img {
-    height: auto;
-    max-height: 250px;
-  }
+
 
   @media (max-width: 480px) {
-  .upload-area {
-    padding: 1rem 0.5rem;
+    .upload-area {
+      padding: 1rem 0.5rem;
+    }
+    
+    .upload-button {
+      width: 100%;
+      justify-content: center;
+    }
   }
-  
-  .upload-button {
-    width: 100%;
-    justify-content: center;
-  }
-}
 
   img {
     max-width: 100%;
