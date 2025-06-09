@@ -4,125 +4,172 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classificador de Esportes com IA | Deep Learning</title>
+    <meta name="description" content="Sistema de Inteligência Artificial para classificação automática de imagens esportivas usando Deep Learning e Transfer Learning com MobileNetV2">
+    <meta name="keywords" content="IA, Deep Learning, Transfer Learning, MobileNetV2, Classificação de Imagens, Esportes">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="/src/img/brain.png" type="image/png" sizes="48x48">
+    
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#7c3aed">
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+    
     <!-- Hero Section -->
-    <section class="hero">
+    <header class="hero" role="banner">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-icon">
+                <div class="hero-icon" aria-hidden="true">
                     <i class="fas fa-brain"></i>
                 </div>
-                <div>
+                <div class="hero-text">
                     <h1>Classificador de Esportes</h1>
                     <p>Sistema de Inteligência Artificial para classificação automática de imagens esportivas usando Deep Learning e Transfer Learning</p>
                 </div>
             </div>
+            
+            <!-- Quick stats -->
+            <div class="hero-stats" aria-label="Estatísticas do projeto">
+                <div class="hero-stat">
+                    <span class="stat-number">224x224</span>
+                    <span class="stat-label">Resolução</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">MobileNetV2</span>
+                    <span class="stat-label">Arquitetura</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="stat-number">Transfer Learning</span>
+                    <span class="stat-label">Técnica</span>
+                </div>
+            </div>
         </div>
-    </section>
+    </header>
 
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" role="navigation" aria-label="Navegação principal">
         <div class="container">
             <div class="nav-content">
-                <a href="#overview" class="nav-link">Visão Geral</a>
-                <a href="#architecture" class="nav-link">Arquitetura</a>
-                <a href="#methodology" class="nav-link">Metodologia</a>
-                <a href="#results" class="nav-link">Resultados</a>
-                <a href="#demo" class="nav-link">Teste a IA</a>
-                <a href="#implementation" class="nav-link">Implementação</a>
+                <a href="#overview" class="nav-link" data-section="overview">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <span>Visão Geral</span>
+                </a>
+                <a href="#architecture" class="nav-link" data-section="architecture">
+                    <i class="fas fa-sitemap" aria-hidden="true"></i>
+                    <span>Arquitetura</span>
+                </a>
+                <a href="#methodology" class="nav-link" data-section="methodology">
+                    <i class="fas fa-cogs" aria-hidden="true"></i>
+                    <span>Metodologia</span>
+                </a>
+                <a href="#results" class="nav-link" data-section="results">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                    <span>Resultados</span>
+                </a>
+                <a href="#demo" class="nav-link" data-section="demo">
+                    <i class="fas fa-play-circle" aria-hidden="true"></i>
+                    <span>Teste a IA</span>
+                </a>
+                <a href="#implementation" class="nav-link" data-section="implementation">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span>Implementação</span>
+                </a>
             </div>
         </div>
     </nav>
 
-    <div class="container">
+    <main id="main-content" class="container">
         <!-- Overview Section -->
-        <section id="overview" class="section">
-            <h2 class="section-title">Visão Geral do Projeto</h2>
+        <section id="overview" class="section" aria-labelledby="overview-title">
+            <h2 id="overview-title" class="section-title">Visão Geral do Projeto</h2>
             <div class="grid grid-2">
-                <div class="card">
-                    <h3><i class="fas fa-target"></i> Objetivo</h3>
+                <article class="card card-animated">
+                    <h3><i class="fas fa-target" aria-hidden="true"></i> Objetivo</h3>
                     <p>Desenvolver um sistema de classificação de imagens esportivas utilizando técnicas avançadas de Deep Learning, especificamente Transfer Learning com MobileNetV2, para identificar automaticamente diferentes modalidades esportivas em fotografias.</p>
-                </div>
-                <div class="card">
-                    <h3><i class="fas fa-cogs"></i> Tecnologias Utilizadas</h3>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> TensorFlow & Keras</li>
-                        <li><i class="fas fa-check"></i> MobileNetV2 (Transfer Learning)</li>
-                        <li><i class="fas fa-check"></i> Data Augmentation</li>
-                        <li><i class="fas fa-check"></i> Fine-tuning</li>
-                        <li><i class="fas fa-check"></i> Callbacks Avançados</li>
+                </article>
+                <article class="card card-animated">
+                    <h3><i class="fas fa-cogs" aria-hidden="true"></i> Tecnologias Utilizadas</h3>
+                    <ul class="feature-list" role="list">
+                        <li><i class="fas fa-check" aria-hidden="true"></i> TensorFlow & Keras</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> MobileNetV2 (Transfer Learning)</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Data Augmentation</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Fine-tuning</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Callbacks Avançados</li>
                     </ul>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- Architecture Section -->
-        <section id="architecture" class="section">
-            <h2 class="section-title">Arquitetura do Modelo</h2>
-            <div class="card">
+        <section id="architecture" class="section" aria-labelledby="architecture-title">
+            <h2 id="architecture-title" class="section-title">Arquitetura do Modelo</h2>
+            <article class="card card-animated">
                 <div class="architecture">
                     <h3>Fluxo de Processamento</h3>
-                    <div class="arch-flow">
+                    <div class="arch-flow" role="img" aria-label="Diagrama do fluxo de processamento do modelo">
                         <div class="arch-step">
-                            <i class="fas fa-image"></i>
+                            <i class="fas fa-image" aria-hidden="true"></i>
                             <div>Imagem de Entrada</div>
                             <small>224x224x3</small>
                         </div>
-                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></div>
                         <div class="arch-step">
-                            <i class="fas fa-layer-group"></i>
+                            <i class="fas fa-layer-group" aria-hidden="true"></i>
                             <div>MobileNetV2</div>
                             <small>Base Pré-treinada</small>
                         </div>
-                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></div>
                         <div class="arch-step">
-                            <i class="fas fa-compress-arrows-alt"></i>
+                            <i class="fas fa-compress-arrows-alt" aria-hidden="true"></i>
                             <div>Global Average Pooling</div>
                             <small>Redução Dimensional</small>
                         </div>
-                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></div>
                         <div class="arch-step">
-                            <i class="fas fa-random"></i>
+                            <i class="fas fa-random" aria-hidden="true"></i>
                             <div>Dropout + BatchNorm</div>
                             <small>Regularização</small>
                         </div>
-                        <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+                        <div class="arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></div>
                         <div class="arch-step">
-                            <i class="fas fa-sitemap"></i>
+                            <i class="fas fa-sitemap" aria-hidden="true"></i>
                             <div>Dense Layer</div>
                             <small>Classificação Final</small>
                         </div>
                     </div>
                 </div>
-            </div>
+            </article>
 
             <div class="grid grid-3">
-                <div class="card">
-                    <h3><i class="fas fa-mobile-alt"></i> MobileNetV2</h3>
+                <article class="card card-animated">
+                    <h3><i class="fas fa-mobile-alt" aria-hidden="true"></i> MobileNetV2</h3>
                     <p>Arquitetura eficiente otimizada para dispositivos móveis, utilizando depthwise separable convolutions para reduzir parâmetros mantendo alta performance.</p>
-                </div>
-                <div class="card">
-                    <h3><i class="fas fa-recycle"></i> Transfer Learning</h3>
+                </article>
+                <article class="card card-animated">
+                    <h3><i class="fas fa-recycle" aria-hidden="true"></i> Transfer Learning</h3>
                     <p>Aproveitamento de conhecimento pré-treinado no ImageNet, congelando camadas iniciais e fine-tuning das últimas 20 camadas para adaptação ao domínio esportivo.</p>
-                </div>
-                <div class="card">
-                    <h3><i class="fas fa-shield-alt"></i> Regularização</h3>
+                </article>
+                <article class="card card-animated">
+                    <h3><i class="fas fa-shield-alt" aria-hidden="true"></i> Regularização</h3>
                     <p>Implementação de Dropout (0.2), BatchNormalization e Weight Decay para prevenir overfitting e melhorar generalização.</p>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- Methodology Section -->
-        <section id="methodology" class="section">
-            <h2 class="section-title">Metodologia de Desenvolvimento</h2>
+        <section id="methodology" class="section" aria-labelledby="methodology-title">
+            <h2 id="methodology-title" class="section-title">Metodologia de Desenvolvimento</h2>
             
-            <div class="card">
-                <h3><i class="fas fa-database"></i> Preparação dos Dados</h3>
-                <div class="code-block">
+            <article class="card card-animated">
+                <h3><i class="fas fa-database" aria-hidden="true"></i> Preparação dos Dados</h3>
+                <div class="code-block" role="img" aria-label="Código de configuração de Data Augmentation">
 <span class="comment"># Configuração de Data Augmentation</span>
 train_datagen = ImageDataGenerator(
     rescale=<span class="string">1./255</span>,
@@ -136,37 +183,37 @@ train_datagen = ImageDataGenerator(
 )
                 </div>
                 <p>Aplicação de técnicas de augmentação conservadoras para aumentar a diversidade dos dados de treino sem comprometer a qualidade das imagens.</p>
-            </div>
+            </article>
 
             <div class="grid grid-2">
-                <div class="card">
-                    <h3><i class="fas fa-brain"></i> Fine-tuning Strategy</h3>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> Congelamento das primeiras camadas</li>
-                        <li><i class="fas fa-check"></i> Treinamento das últimas 20 camadas</li>
-                        <li><i class="fas fa-check"></i> Learning rate baixo (1e-4)</li>
-                        <li><i class="fas fa-check"></i> Otimizador Adam com weight decay</li>
+                <article class="card card-animated">
+                    <h3><i class="fas fa-brain" aria-hidden="true"></i> Fine-tuning Strategy</h3>
+                    <ul class="feature-list" role="list">
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Congelamento das primeiras camadas</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Treinamento das últimas 20 camadas</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Learning rate baixo (1e-4)</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Otimizador Adam com weight decay</li>
                     </ul>
-                </div>
-                <div class="card">
-                    <h3><i class="fas fa-chart-line"></i> Callbacks Inteligentes</h3>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> EarlyStopping (patience=10)</li>
-                        <li><i class="fas fa-check"></i> ReduceLROnPlateau (factor=0.5)</li>
-                        <li><i class="fas fa-check"></i> Restore best weights</li>
-                        <li><i class="fas fa-check"></i> Monitoramento de val_loss</li>
+                </article>
+                <article class="card card-animated">
+                    <h3><i class="fas fa-chart-line" aria-hidden="true"></i> Callbacks Inteligentes</h3>
+                    <ul class="feature-list" role="list">
+                        <li><i class="fas fa-check" aria-hidden="true"></i> EarlyStopping (patience=10)</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> ReduceLROnPlateau (factor=0.5)</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Restore best weights</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i> Monitoramento de val_loss</li>
                     </ul>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- Results Section -->
-        <section id="results" class="section">
-            <h2 class="section-title">Resultados e Performance</h2>
+        <section id="results" class="section" aria-labelledby="results-title">
+            <h2 id="results-title" class="section-title">Resultados e Performance</h2>
             
-            <div class="stats-grid">
+            <div class="stats-grid" role="region" aria-label="Estatísticas de performance do modelo">
                 <div class="stat-card">
-                    <div class="stat-value">50</div>
+                    <div class="stat-value" data-count="50">50</div>
                     <div class="stat-label">Épocas Máximas</div>
                 </div>
                 <div class="stat-card">
@@ -174,7 +221,7 @@ train_datagen = ImageDataGenerator(
                     <div class="stat-label">Resolução de Entrada</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">32</div>
+                    <div class="stat-value" data-count="32">32</div>
                     <div class="stat-label">Batch Size</div>
                 </div>
                 <div class="stat-card">
@@ -184,26 +231,26 @@ train_datagen = ImageDataGenerator(
             </div>
 
             <div class="image-gallery">
-                <div class="image-card">
-                    <img src="../img/confusion_matrix.png" alt="Matriz de Confusão">
-                    <div class="image-card-content">
-                        <h4><i class="fas fa-table"></i> Matriz de Confusão</h4>
+                <figure class="image-card">
+                    <img src="/src/img/confusion_matrix.png" alt="Matriz de Confusão mostrando a performance do modelo por classe" loading="lazy">
+                    <figcaption class="image-card-content">
+                        <h4><i class="fas fa-table" aria-hidden="true"></i> Matriz de Confusão</h4>
                         <p>Visualização detalhada da performance do modelo por classe, mostrando verdadeiros positivos, falsos positivos e a distribuição de erros entre as diferentes modalidades esportivas.</p>
-                    </div>
-                </div>
-                <div class="image-card">
-                    <img src="../img/training_history.png" alt="Histórico de Treinamento">
-                    <div class="image-card-content">
-                        <h4><i class="fas fa-chart-line"></i> Histórico de Treinamento</h4>
+                    </figcaption>
+                </figure>
+                <figure class="image-card">
+                    <img src="/src/img/training_history.png" alt="Gráfico do histórico de treinamento mostrando evolução da acurácia e loss" loading="lazy">
+                    <figcaption class="image-card-content">
+                        <h4><i class="fas fa-chart-line" aria-hidden="true"></i> Histórico de Treinamento</h4>
                         <p>Evolução da acurácia e loss durante o treinamento, demonstrando a convergência do modelo e a eficácia das técnicas de regularização aplicadas.</p>
-                    </div>
-                </div>
+                    </figcaption>
+                </figure>
             </div>
 
-            <div class="card">
-                <h3><i class="fas fa-clipboard-list"></i> Métricas de Avaliação</h3>
+            <article class="card card-animated">
+                <h3><i class="fas fa-clipboard-list" aria-hidden="true"></i> Métricas de Avaliação</h3>
                 <p>O modelo foi avaliado utilizando múltiplas métricas para garantir uma análise completa da performance:</p>
-                <div class="code-block">
+                <div class="code-block" role="img" aria-label="Código de avaliação do modelo">
 <span class="comment"># Avaliação detalhada do modelo</span>
 test_loss, test_acc = model.evaluate(test_generator)
 y_pred = np.argmax(model.predict(test_generator), axis=<span class="string">1</span>)
@@ -215,76 +262,76 @@ y_pred = np.argmax(model.predict(test_generator), axis=<span class="string">1</s
     target_names=list(train_generator.class_indices.keys())
 ))
                 </div>
-            </div>
+            </article>
         </section>
 
         <!-- Demo Section -->
-        <section id="demo" class="section">
-            <h2 class="section-title">Teste a Inteligência Artificial</h2>
+        <section id="demo" class="section" aria-labelledby="demo-title">
+            <h2 id="demo-title" class="section-title">Teste a Inteligência Artificial</h2>
             <div class="demo-intro">
-                <div class="card">
-                    <h3><i class="fas fa-play-circle"></i> Experimente o Modelo</h3>
+                <article class="card card-animated">
+                    <h3><i class="fas fa-play-circle" aria-hidden="true"></i> Experimente o Modelo</h3>
                     <p>Faça upload de uma imagem esportiva e veja o modelo em ação! O sistema irá analisar a imagem e identificar qual esporte está sendo praticado, mostrando a confiança da predição.</p>
-                </div>
+                </article>
             </div>
 
             <div class="demo-container">
                 <!-- Upload Area -->
                 <div class="upload-card">
-                    <div class="upload-area" id="uploadArea">
+                    <div class="upload-area" id="uploadArea" role="button" tabindex="0" aria-label="Área de upload de imagem. Clique ou arraste uma imagem aqui">
                         <div class="upload-content" id="uploadContent">
-                            <div class="upload-icon">
+                            <div class="upload-icon" aria-hidden="true">
                                 <i class="fas fa-cloud-upload-alt"></i>
                             </div>
                             <div class="upload-text">
                                 <p class="upload-title">Arraste uma imagem esportiva aqui ou clique para selecionar</p>
                                 <p class="upload-subtitle">Suporta JPG, PNG, WebP até 10MB</p>
                             </div>
-                            <button class="upload-button" id="selectButton">
-                                <i class="fas fa-cloud-upload-alt"></i>
+                            <button class="upload-button" id="selectButton" type="button">
+                                <i class="fas fa-cloud-upload-alt" aria-hidden="true"></i>
                                 Selecionar Imagem
                             </button>
                         </div>
 
                         <div class="preview-content hidden" id="previewContent">
                             <div class="image-preview">
-                                <img id="previewImage" alt="Preview" />
+                                <img id="previewImage" alt="Imagem selecionada para classificação" />
                                 <div class="image-badge">
-                                    <i class="fas fa-image"></i>
+                                    <i class="fas fa-image" aria-hidden="true"></i>
                                     Imagem carregada
                                 </div>
                             </div>
                             <div class="preview-info">
                                 <p class="file-name" id="fileName"></p>
-                                <button class="change-button" id="changeButton">Trocar imagem</button>
+                                <button class="change-button" id="changeButton" type="button">Trocar imagem</button>
                             </div>
                         </div>
                     </div>
-                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;" aria-label="Seletor de arquivo de imagem">
                 </div>
 
                 <!-- Classify Button -->
                 <div class="classify-section hidden" id="classifySection">
-                    <button class="classify-button" id="classifyButton">
-                        <i class="fas fa-bolt"></i>
+                    <button class="classify-button" id="classifyButton" type="button">
+                        <i class="fas fa-bolt" aria-hidden="true"></i>
                         <span id="buttonText">Classificar Imagem</span>
                     </button>
                 </div>
 
                 <!-- Error Alert -->
-                <div class="alert alert-error hidden" id="errorAlert">
-                    <i class="fas fa-exclamation-triangle"></i>
+                <div class="alert alert-error hidden" id="errorAlert" role="alert" aria-live="polite">
+                    <i class="fas fa-exclamation-triangle" aria-hidden="true"></i>
                     <span id="errorMessage"></span>
                 </div>
 
                 <!-- Results -->
-                <div class="results-section hidden" id="resultsSection">
+                <div class="results-section hidden" id="resultsSection" role="region" aria-label="Resultados da classificação" aria-live="polite">
                     <!-- Top Result -->
-                    <div class="result-card primary-result">
-                        <div class="card-header">
-                            <i class="fas fa-trophy"></i>
+                    <article class="result-card primary-result">
+                        <header class="card-header">
+                            <i class="fas fa-trophy" aria-hidden="true"></i>
                             <h3>Classificação Principal</h3>
-                        </div>
+                        </header>
                         <div class="card-content">
                             <div class="result-info">
                                 <div class="result-details">
@@ -295,27 +342,27 @@ y_pred = np.argmax(model.predict(test_generator), axis=<span class="string">1</s
                                     <div class="probability-value" id="topProbability">0%</div>
                                 </div>
                             </div>
-                            <div class="progress-bar">
+                            <div class="progress-bar" role="progressbar" aria-label="Nível de confiança da classificação principal">
                                 <div class="progress-fill" id="topProgress"></div>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Other Results -->
-                    <div class="result-card">
-                        <div class="card-header">
-                            <i class="fas fa-target"></i>
+                    <article class="result-card">
+                        <header class="card-header">
+                            <i class="fas fa-target" aria-hidden="true"></i>
                             <h3>Outras Possibilidades</h3>
-                        </div>
+                        </header>
                         <div class="card-content">
                             <div class="other-results" id="otherResults">
                                 <!-- Results will be populated by JavaScript -->
                             </div>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Summary Stats -->
-                    <div class="demo-stats-grid">
+                    <div class="demo-stats-grid" role="region" aria-label="Estatísticas do resultado">
                         <div class="stat-card">
                             <div class="stat-value" id="totalClasses">0</div>
                             <div class="stat-label">Classes Detectadas</div>
@@ -334,13 +381,13 @@ y_pred = np.argmax(model.predict(test_generator), axis=<span class="string">1</s
         </section>
 
         <!-- Implementation Section -->
-        <section id="implementation" class="section">
-            <h2 class="section-title">Detalhes de Implementação</h2>
+        <section id="implementation" class="section" aria-labelledby="implementation-title">
+            <h2 id="implementation-title" class="section-title">Detalhes de Implementação</h2>
             
             <div class="grid grid-2">
-                <div class="card">
-                    <h3><i class="fas fa-code"></i> Configurações Técnicas</h3>
-                    <div class="code-block">
+                <article class="card card-animated">
+                    <h3><i class="fas fa-code" aria-hidden="true"></i> Configurações Técnicas</h3>
+                    <div class="code-block" role="img" aria-label="Configurações técnicas do modelo">
 <span class="comment"># Configurações principais</span>
 BATCH_SIZE = <span class="string">32</span>
 IMG_SIZE = (<span class="string">224</span>, <span class="string">224</span>)
@@ -353,42 +400,52 @@ optimizer = Adam(
     weight_decay=<span class="string">1e-4</span>
 )
                     </div>
-                </div>
-                <div class="card">
-                    <h3><i class="fas fa-save"></i> Salvamento e Deployment</h3>
+                </article>
+                <article class="card card-animated">
+                    <h3><i class="fas fa-save" aria-hidden="true"></i> Salvamento e Deployment</h3>
                     <p>O modelo treinado é salvo em formato H5 para facilitar o deployment e reutilização. A arquitetura permite fácil integração em aplicações web e mobile.</p>
-                    <div class="code-block">
+                    <div class="code-block" role="img" aria-label="Código de salvamento do modelo">
 <span class="comment"># Salvamento do modelo</span>
 model.save(<span class="string">'models/modelo_2.h5'</span>)
                     </div>
-                </div>
+                </article>
             </div>
 
-            <div class="card">
-                <h3><i class="fas fa-lightbulb"></i> Inovações e Otimizações</h3>
+            <article class="card card-animated">
+                <h3><i class="fas fa-lightbulb" aria-hidden="true"></i> Inovações e Otimizações</h3>
                 <div class="grid grid-3">
-                    <div>
+                    <div class="innovation-item">
                         <h4>Data Augmentation Inteligente</h4>
                         <p>Aplicação de transformações conservadoras que preservam as características essenciais dos esportes.</p>
                     </div>
-                    <div>
+                    <div class="innovation-item">
                         <h4>Fine-tuning Seletivo</h4>
                         <p>Estratégia de descongelamento gradual das últimas camadas para adaptação específica ao domínio.</p>
                     </div>
-                    <div>
+                    <div class="innovation-item">
                         <h4>Callbacks Adaptativos</h4>
                         <p>Sistema inteligente de parada antecipada e redução de learning rate baseado na performance de validação.</p>
                     </div>
                 </div>
-            </div>
+            </article>
         </section>
+    </main>
 
-        <!-- Footer -->
-        <footer style="text-align: center; padding: 2rem 0; color: var(--text-secondary); border-top: 1px solid #e2e8f0; margin-top: 4rem;">
-            <p>Desenvolvido usando TensorFlow e Transfer Learning</p>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <p>Desenvolvido usando TensorFlow e Transfer Learning</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top hidden" id="backToTop" type="button" aria-label="Voltar ao topo">
+        <i class="fas fa-chevron-up" aria-hidden="true"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
 </html>
+    
