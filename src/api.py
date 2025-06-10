@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Carrega o modelo e os labelsweb
-modelo = load_model('models/modelo.h5')
+modelo = load_model('models/best_model.h5')
 
 # Carrega o mapeamento de classes
 df_classes = pd.read_csv('./data/sports.csv')
